@@ -196,26 +196,21 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+    <link href="stylesheets/screen-d020e3af.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-bccf8c07.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c5541673.js"></script>
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" alt="Navbar" />
+        <img src="images/navbar-cad8cdcb.png" alt="Navbar" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
+      <img src="images/logo-cc578d87.png" class="logo" alt="Logo" />
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -225,19 +220,40 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#url-naming" class="toc-h1 toc-link" data-title="URL Naming">URL Naming</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#response-format" class="toc-h1 toc-link" data-title="Response Format">Response Format</a>
+          </li>
+          <li>
+            <a href="#pagination-and-lists" class="toc-h1 toc-link" data-title="Pagination and Lists">Pagination and Lists</a>
+          </li>
+          <li>
+            <a href="#how-do-i" class="toc-h1 toc-link" data-title="How do I...">How do I...</a>
+          </li>
+          <li>
+            <a href="#request-format" class="toc-h1 toc-link" data-title="Request format">Request format</a>
+          </li>
+          <li>
+            <a href="#rate-limiting" class="toc-h1 toc-link" data-title="Rate limiting">Rate limiting</a>
+          </li>
+          <li>
+            <a href="#visits" class="toc-h1 toc-link" data-title="Visits">Visits</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#get-all-visits" class="toc-h2 toc-link" data-title="Get All Visits">Get All Visits</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#get-a-specific-visit" class="toc-h2 toc-link" data-title="Get a specific visit">Get a specific visit</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#add-visits" class="toc-h2 toc-link" data-title="Add visits">Add visits</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-specific-visit" class="toc-h2 toc-link" data-title="Update a specific visit">Update a specific visit</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-specific-visit" class="toc-h2 toc-link" data-title="Delete a specific visit">Delete a specific visit</a>
                   </li>
               </ul>
           </li>
@@ -246,190 +262,1291 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://go.letsjobit.com/#!join' target='_blank'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>This reference helps you implement the RESTful LetsJobIt API v2. This API uses a JSON format for output and is capable of handling CORS (Cross-Origin Resource Sharing) requests. The API is stateless – all requests are validated against an API token. The API token can be obtained manually from the LetsJobIt app.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<aside class="warning">
+Please be aware that any actions you perform through this reference testing functionality will involve operations with your production data. To test your applications against some sandbox data, we recommend creating a new, separate LetsJobIt account for sandboxing purposes.
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+This API is under active development and we are constantly adding new functionality.
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+All requests to the API must be made over SSL (https not http).
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='url-naming'>URL Naming</h1>
+<p>The API uses a straight-forward URL naming convention. Each request must be made to the API endpoint (https://app.letsjobit.com/api/v2/), followed by the type of object in a plural form, e.g. https://app.letsjobit.com/api/v2/visits.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>When one resource is being requested, you have the option to append the ID of the item to the URL, e.g. https://app.letsjobit.com/v2/visits/yre78r7wer. If you don&#39;t append an ID of the item, then all the items for that resource will be returned (paginated, 100 at the time). The API_KEY must be provided as part of the query string for all requests.</p>
+<h1 id='response-format'>Response Format</h1>
+<p>Each response sent from the API contains a &#39;meta&#39; object indicating whether the request was carried out or not. If the request was not successful, an optional &#39;error&#39; parameter (string) may be given. If the request was successful, the response is always contained within a &#39;data&#39; parameter, and additional metadata is contained inside a &#39;meta&#39; parameter.</p>
+<h1 id='pagination-and-lists'>Pagination and Lists</h1>
+<p>Most of the lists/item collections are paginated. The parameter that controls the pagination is &#39;pagination&#39;, indicating starting page of the next set of records. Within the response, a &#39;meta&#39; object will be set upon pagination. The &#39;remainingRecords&#39; parameter will contain remaining records and the parameter &#39;nextStart&#39; will tell you where to start the next request. If &#39;nextStart&#39; = 100, then the query parameter &#39;pagination&#39; should be 100 in the next request you make for the same URI.</p>
+<h1 id='how-do-i'>How do I...</h1>
+<p>&quot;How can I fetch all visits, leads, items, etc?&quot; You can fetch all items of any kind from the LetsJobIt API. In order to fetch all visits (or any other resource), you can use the pagination data of our response objects to issue multiple requests in a loop to fetch all visits. You would have to check the &#39;remainingRecords&#39; parameter in the response &#39;meta&#39; object, and issue an additional request — only increasing the &#39;pagination&#39; property by 100 (the hard limit we impose on our API). For example, if your first request ran against &amp;pagination=0, you would have to make the next request with &amp;pagination=100 to get the next 100 items, and continue making requests until the &#39;remainingRecords&#39; parameter is 0 (zero) in the response.</p>
+<h1 id='request-format'>Request format</h1>
+<p>You must use JSON body format when performing API requests. In order to do a proper JSON-formatted request, make sure you provide the header &quot;Content-Type&quot;: &quot;application/json&quot; as part of your HTTP request.</p>
+<h1 id='rate-limiting'>Rate limiting</h1>
+<p>Rate limiting is is considered per API KEY. Our API allows you to perform 100 requests per 10 seconds. Every API response includes the following headers:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<ul>
+<li>X-RateLimit-Remaining: the amount of requests left for the 10 seconds window.</li>
+<li>X-Rate-Limit-Reset: the amount of seconds before the limit resets.</li>
+</ul>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<p>In case the limit is exceeded for the time window, the LetsJobIt API will return an error response with HTTP code 429 and the headers above.</p>
+<h1 id='visits'>Visits</h1><h2 id='get-all-visits'>Get All Visits</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.letsjobit.com/api/v2/visits"</span>
+  -H <span class="s2">"Authorization: Bearer MY_API_KEY"</span>
+  -H <span class="s1">'Content-Type: application/json'</span>
 </code></pre>
 <blockquote>
+<p>Make sure to replace MY_API_KEY with your API key</p>
+
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="w">
+    </span><span class="s2">"returnedRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"remainingRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nextStart"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"yKQhJZ9B7PTT85kWc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"driverId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"FEn9BJz93svSNPx7p"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Liam"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-31"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalJobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">10816703</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"docType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"CALL OUT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"docNo"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"H-017623"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"serviceOrder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"The Green Sleeve"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"siteId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"30101308"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">57.000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lng"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-2.000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"site"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"The Green Sleeve"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"999 West High Street"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postCode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AB51 3QR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"INVERURIE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"obs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Contact Info: The Green Sleeve, John: 01999999999 </span><span class="se">\r\n</span><span class="s2"> AQUARIUS TONE7/3 2001 - Side of the shop</span><span class="se">\r\n</span><span class="s2">Access 9am - 5.30pm</span><span class="se">\r\n</span><span class="s2">No parking onsite "</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contactPerson"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contactPhone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"01999999999"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"emailMandatory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"priority"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"showItemsOnOrderSection"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hideEquipmentDetails"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hideDeliveryItemsSection"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"signeeName"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"signeeEmail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"john@email.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subContractorIds"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+            </span><span class="s2">"My Subcontractor"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"territory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AB-Aberdeen"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"useStartPauseStopStyleButtonsInJobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"inMobileApp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"NPSMandatory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precedencePriorityVisit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"closeVisitOnLastJobClose"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"companyId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"LPeaJNaLQT6RqcFdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time_windows"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"earliest"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">30600</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"latest"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">64800</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"required_skills"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+            </span><span class="s2">"Plumber"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Hot water technician"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Installer"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"allowed_vehicles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"confirmClose"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"inProgress"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"closed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"skipped"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geocoding"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"showDiscountAndBonusOnItemsOnOrder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"duration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2100</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-09 15:48:17"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdUser"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"API"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hasChangesToSync"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"modifieddAt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-24 15:45:38"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"modifyUser"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2pjP3L3S8JtZhLPoN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"servicing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"signeeRating"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"signature"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"/9j/4AAQSkZJRgABAQEAAAAAA..."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"appClientVersion"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1.7.163"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"closeDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-24 15:45"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"skippedReasonId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all visits. Visits are the main resource in our API, since they link all the other resources together. Within LetsJobIt, &quot;visits&quot; or &quot;sites&quot; refer to the same thing: it&#39;s a customer (address) you must visit to perform a service (repair, delivery, etc.).</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>GET https://app.letsjobit.com/api/v2/visits</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
+<p>Use the query parameters below to refine your request.</p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Format</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>pagination</strong></td>
+<td>string</td>
+<td>start number (skip) for the query</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>_id</strong></td>
+<td>string</td>
+<td>Visit internal id</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td>string</td>
+<td>Your ERP id</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>date</strong></td>
+<td>string</td>
+<td>visit date in &quot;YYYY-MM-DD&quot; format</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>driverId</strong></td>
+<td>string</td>
+<td>the id of the driver assigned to the visit</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>docNo</strong></td>
+<td>string</td>
+<td>user document number (&quot;contains&quot; search)</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>closed</strong></td>
+<td>number</td>
+<td>Visit status: 0 - opened, 1 - closed</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>confirmClose</strong></td>
+<td>number</td>
+<td>Determines if the visit was confirmed as closed by your ERP system. LetsJobIt is an offline first app and we like to let our users know if/when their info is synchronised.</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>inProgress</strong></td>
+<td>number</td>
+<td>Determines if the visit is in progress. The visit is in progress from the moment the user starts servicing a job until the moment the visit is closed.</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>priority</strong></td>
+<td>number</td>
+<td>Visit priority. 1 - high priority, 2 - normal priority, 3 - low priority</td>
+<td>optional</td>
+</tr>
+<tr>
+<td><strong>skipped</strong></td>
+<td>number</td>
+<td>If the visit was skipped (postponed): 0 - not skipped, 1 - skipped</td>
+<td>optional</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Remember — your resultas are paginated and you have to manage that on your side!
+</aside>
+
+<p>A visits response contains an object with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><strong>meta</strong></td>
+<td>Object</td>
+<td>metadata about this request</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><strong>data</strong></td>
+<td>Object</td>
+<td>the data returned</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>The <strong>meta</strong> object has the following properties:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>totalRecords</strong></td>
+<td>number</td>
+<td>The total records available</td>
+</tr>
+<tr>
+<td><strong>returnedRecords</strong></td>
+<td>number</td>
+<td>Returned records count</td>
+</tr>
+<tr>
+<td><strong>remainingRecords</strong></td>
+<td>number</td>
+<td>Remaining records count</td>
+</tr>
+<tr>
+<td><strong>nextStart</strong></td>
+<td>number</td>
+<td>Start index of next record</td>
+</tr>
+</tbody></table>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>The <strong>data</strong> object has the following properties:</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>_id</strong></td>
+<td>string</td>
+<td>the internal id of the visit</td>
+</tr>
+<tr>
+<td><strong>driverId</strong></td>
+<td>string</td>
+<td>The driver id for this visit</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>string</td>
+<td>The driver name for this visit</td>
+</tr>
+<tr>
+<td><strong>date</strong></td>
+<td>string</td>
+<td>The expected date for this service</td>
+</tr>
+<tr>
+<td><strong>totalJobs</strong></td>
+<td>integer</td>
+<td>The total jobs (total service items - actionItem type items) attached to this visit</td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td>integer</td>
+<td>Your ERP id for this visit</td>
+</tr>
+<tr>
+<td><strong>docNo</strong></td>
+<td>string</td>
+<td>the document number associated with the visit</td>
+</tr>
+<tr>
+<td><strong>serviceOrder</strong></td>
+<td>integer</td>
+<td>The sequential order in which the service must be done (relative to the other visits). If you use LetsJobIt routing, routes will be sequenced and this value will be overwritten.</td>
+</tr>
+<tr>
+<td><strong>customer</strong></td>
+<td>string</td>
+<td>The customer name</td>
+</tr>
+<tr>
+<td><strong>siteId</strong></td>
+<td>integer</td>
+<td>Your ERP customer address id. Useful for integrations.</td>
+</tr>
+<tr>
+<td><strong>lat</strong></td>
+<td>number</td>
+<td>the address latitude</td>
+</tr>
+<tr>
+<td><strong>lng</strong></td>
+<td>number</td>
+<td>the address longitude</td>
+</tr>
+<tr>
+<td><strong>site</strong></td>
+<td>string</td>
+<td>the site (address) description. This can be an add-on to the address field.</td>
+</tr>
+<tr>
+<td><strong>address</strong></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>postCode</strong></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>city</strong></td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>obs</strong></td>
+<td>string</td>
+<td>the visit observations.</td>
+</tr>
+<tr>
+<td><strong>contactPerson</strong></td>
+<td>string</td>
+<td>the name of the contact person at the customer</td>
+</tr>
+<tr>
+<td><strong>contactPhone</strong></td>
+<td>string</td>
+<td>the phone number of the contact person at the customer</td>
+</tr>
+<tr>
+<td><strong>emailMandatory</strong></td>
+<td>integer</td>
+<td>Determines if the email field in the client signature screen is mandatory. 1 for true, 0 for false.</td>
+</tr>
+<tr>
+<td><strong>showItemsOnOrderSection</strong></td>
+<td>number</td>
+<td>Determines if the items on order section in the job view is visible. 1 to show, 0 to hide.</td>
+</tr>
+<tr>
+<td><strong>hideEquipmentDetails</strong></td>
+<td>number</td>
+<td>Determines if the equipment details section on the job view (top) is visible. 0 to show, 1 to hide.</td>
+</tr>
+<tr>
+<td><strong>signeeName</strong></td>
+<td>string</td>
+<td>The name of the customer contact that signed on visit close.</td>
+</tr>
+<tr>
+<td><strong>signeeEmail</strong></td>
+<td>string</td>
+<td>The email of the customer contact that signed on visit close.</td>
+</tr>
+<tr>
+<td><strong>companyId</strong></td>
+<td>string</td>
+<td>your company ID as recorded at LetsJobIt</td>
+</tr>
+<tr>
+<td><strong>subContractorIds</strong></td>
+<td>string array</td>
+<td>The sub-contractor name(s) related with this visit. If more than one, they&#39;ll be supplied in a comma separated list. The leftmost name is the sub-contractor to which the visit is intended (or the one that completed the visit). If there is no sub-contractor, this field is returned as null.</td>
+</tr>
+<tr>
+<td><strong>confirmClose</strong></td>
+<td>number</td>
+<td>Determines if the visit was confirmed as closed by your ERP system. LetsJobIt is an offline first app and we like to let our users know if/when their info is synchronised.</td>
+</tr>
+<tr>
+<td><strong>inProgress</strong></td>
+<td>number</td>
+<td>Determines if the visit is in progress. The visit is in progress from the moment the user starts servicing a job until the moment the visit is closed.</td>
+</tr>
+<tr>
+<td><strong>closed</strong></td>
+<td>number</td>
+<td>If the visit is closed. 1 - closed, 0 - opened.</td>
+</tr>
+<tr>
+<td><strong>skipped</strong></td>
+<td>number</td>
+<td>if the visit was skipped. A skipped visit is a visit that could not be accomplished for any reason (see unsuccessful reasons below - examples: client was closed, wrong address, etc.).</td>
+</tr>
+<tr>
+<td><strong>hideDeliveryItemsSection</strong></td>
+<td>number</td>
+<td>If the delivery items sections is shown in the job view. 1 - hide, 0 - show.</td>
+</tr>
+<tr>
+<td><strong>showDiscountAndBonusOnItemsOnOrder</strong></td>
+<td>number</td>
+<td>If 1 (true), a special section is shown below each item to order. The 2 fields shown are &quot;discount&quot; and &quot;Bonus&quot;.</td>
+</tr>
+<tr>
+<td><strong>priority</strong></td>
+<td>number</td>
+<td>the service/delivery priority, from 1 to 10: 1 - highest priority, 10 - lowest priority.</td>
+</tr>
+<tr>
+<td><strong>useStartPauseStopStyleButtonsInJobs</strong></td>
+<td>number</td>
+<td>If the job shows start/pause/stop buttons as opposed to showing only a start/finish button. This option allows you to pause one job (lunch, have to start another job and come back to this one...) and resume it afterwards.</td>
+</tr>
+<tr>
+<td><strong>modifieddAt</strong></td>
+<td>string</td>
+<td>the date/time the record was modified.</td>
+</tr>
+<tr>
+<td><strong>modifyUser</strong></td>
+<td>string</td>
+<td>the user id that last modified the record</td>
+</tr>
+<tr>
+<td><strong>duration</strong></td>
+<td>number</td>
+<td>The total duration in seconds of all the service jobs in the visit. This duration is only theoretical and corresponds to the durations you&#39;ve eventually sent for every service job in the visit, for routing purposes.</td>
+</tr>
+<tr>
+<td><strong>signeeRating</strong></td>
+<td>number</td>
+<td>The 1 to 5 NPS score from your customer. If the value is 0 (zero), then the customer didn&#39;t enter a score.</td>
+</tr>
+<tr>
+<td><strong>closeDate</strong></td>
+<td>string</td>
+<td>The date-time the document was closed.</td>
+</tr>
+<tr>
+<td><strong>skippedReasonId</strong></td>
+<td>string or number</td>
+<td>The skip reason id (if the visit was skipped). Skip reasons are documented under the &quot;Static Tables&quot; model and end points.</td>
+</tr>
+<tr>
+<td><strong>lines</strong></td>
+<td>array of objects</td>
+<td>the line items included in the visit</td>
+</tr>
+</tbody></table>
+
+<p>The <strong>lines</strong> array is composed of objects with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>actionItem</strong></td>
+<td>boolean</td>
+<td>Determines if the line item is a &quot;job type&quot; item. Please refer to our user documentation.</td>
+</tr>
+<tr>
+<td><strong>allowRebrand</strong></td>
+<td>boolean</td>
+<td>Determines if the user is allowed to change the equipment brand in the job view. Please refer to the our user documentation.</td>
+</tr>
+<tr>
+<td><strong>brand</strong></td>
+<td>string</td>
+<td>The equipment brand</td>
+</tr>
+<tr>
+<td><strong>brandId</strong></td>
+<td>integer</td>
+<td>The equipment brand id from your backend system.</td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td>string</td>
+<td>The description of the item (what shows in the interface).</td>
+</tr>
+<tr>
+<td><strong>extraData</strong></td>
+<td>array of objects</td>
+<td>An array of objects containing custom field definitions. These field show in the job view, after the stardard fields.</td>
+</tr>
+<tr>
+<td><strong>hasBatch</strong></td>
+<td>boolean</td>
+<td>Determines if the line-item</td>
+</tr>
+<tr>
+<td><strong>hasReturn</strong></td>
+<td>boolean</td>
+<td>Determines if the line item has returned items (like empty pallets or empty packages)</td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td>number</td>
+<td>Your ERP line id. Can be useful to cross check your responses and make the integration process easier.</td>
+</tr>
+<tr>
+<td><strong>itemId</strong></td>
+<td>number</td>
+<td>Your ERP item id.</td>
+</tr>
+<tr>
+<td><strong>jobType</strong></td>
+<td>string</td>
+<td>Arbitrary type to classify this job. Could be &quot;delivery&quot;, &quot;installation&quot;, &quot;repair&quot;, etc</td>
+</tr>
+<tr>
+<td><strong>location</strong></td>
+<td>string</td>
+<td>The location of the service, within your customer premisses. &quot;bar 2nd floor&quot;, &quot;kitchen&quot;, etc.</td>
+</tr>
+<tr>
+<td><strong>model</strong></td>
+<td>string</td>
+<td>The model name (related with the equipment brand)</td>
+</tr>
+<tr>
+<td><strong>modelId</strong></td>
+<td>number</td>
+<td>The model Id from your ERP</td>
+</tr>
+<tr>
+<td><strong>qty</strong></td>
+<td>number</td>
+<td>The quantity for this item. Defaults to 1.</td>
+</tr>
+<tr>
+<td><strong>serialNr</strong></td>
+<td>string</td>
+<td>The equipment serial number for this job.</td>
+</tr>
+<tr>
+<td><strong>serialNrId</strong></td>
+<td>number</td>
+<td>Your ERP serialNr Id. Useful for integration purposes.</td>
+</tr>
+</tbody></table>
+
+<p>The <strong>extraData</strong> array is composed of objects with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>caption</strong></td>
+<td>string</td>
+<td>The field name to show to the user.</td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td>string</td>
+<td>An optional description to show above the caption, intructing the user on how to fill in that field.</td>
+</tr>
+<tr>
+<td><strong>max</strong></td>
+<td>integer</td>
+<td>The max value for the field (only applies to numeric fields)</td>
+</tr>
+<tr>
+<td><strong>min</strong></td>
+<td>integer</td>
+<td>The min value for the field (only applies to numeric fields)</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>string</td>
+<td>The field name as saved to the database.</td>
+</tr>
+<tr>
+<td><strong>pattern</strong></td>
+<td>string</td>
+<td>A regexp expression to validate the field against.</td>
+</tr>
+<tr>
+<td><strong>step</strong></td>
+<td>number</td>
+<td>The html5 step value for the field (only applies to numeric fields)</td>
+</tr>
+<tr>
+<td><strong>type</strong></td>
+<td>string</td>
+<td>The field html5 type.</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-visit'>Get a specific visit</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.letsjobit.com/api/v2/visits/1"</span>
+  -H <span class="s2">"Authorization: Bearer MY_API_KEY"</span>
+  -H <span class="s1">'Content-Type: application/json'</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Make sure to replace MY_API_KEY by your API_KEY</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>The above command returns a JSON representation of the visit with ID = 1 and with the same structure as the &quot;get all visits&quot; endpoint..</p>
+</blockquote>
+
+<p>This endpoint retrieves a specific visit by ID.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>GET https://app.letsjobit.com/api/v2/visits/{ID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Format</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>string</td>
+<td>The ID of the visit to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<h2 id='add-visits'>Add visits</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.letsjobit.com/api/v2/visits/1"</span>
+  -X POST
+  -H <span class="s2">"Authorization: Bearer MY_API_KEY"</span>
+  -H <span class="s1">'Content-Type: application/json'</span>
+  --data <span class="s1">$'{...}'</span> <span class="c"># a visit object array</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Make sure to replace MY_API_KEY by your API_KEY</p>
+
+<p>The data object in the above command should be a &quot;visits&quot; array with a 
+JSON structure similar to the below:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"driverId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"FEn9BJz93svSNPx7p"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Liam"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-31"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">10816703</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"docType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"CALL OUT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"docNo"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"H-017623"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"serviceOrder"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"The Green Sleeve"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"siteId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"30101308"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">57.000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lng"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-2.000000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"site"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"The Green Sleeve"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"999 West High Street"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postCode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AB51 3QR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"INVERURIE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"obs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Contact Info: The Green Sleeve, John: 01999999999 </span><span class="se">\r\n</span><span class="s2"> AQUARIUS TONE7/3 2001 - Side of the shop</span><span class="se">\r\n</span><span class="s2">Access 9am - 5.30pm</span><span class="se">\r\n</span><span class="s2">No parking onsite "</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contactPerson"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contactPhone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"01999999999"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"emailMandatory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"priority"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"showItemsOnOrderSection"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hideEquipmentDetails"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hideDeliveryItemsSection"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"signeeName"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"signeeEmail"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"john@email.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subContractorIds"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+            </span><span class="s2">"My Subcontractor"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"territory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AB-Aberdeen"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"useStartPauseStopStyleButtonsInJobs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"inMobileApp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"NPSMandatory"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"precedencePriorityVisit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"closeVisitOnLastJobClose"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"companyId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"LPeaJNaLQT6RqcFdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time_windows"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"earliest"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">30600</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"latest"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">64800</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"required_skills"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+            </span><span class="s2">"Plumber"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Hot water technician"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Installer"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"allowed_vehicles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"confirmClose"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"inProgress"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"closed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"skipped"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"duration"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2100</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>The request returns JSON similar to the below</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"recordsUpdated"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"recordsInserted"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error description"</span><span class="w">
+        </span><span class="p">}</span><span class="w"> 
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
+<p>This endpoint inserts/updates a new/existing visits.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>POST https://app.letsjobit.com/api/v2/visits</code></p>
+<h3 id='url-body'>URL body</h3>
+<p>Pass an array of visit objects, each with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>driverId</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The driver id for this visit</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The driver name for this visit</td>
+</tr>
+<tr>
+<td><strong>date</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The expected date for this service</td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td>number</td>
+<td>yes</td>
+<td>Your ERP id (or unique reference) for this visit. This field is mandatory because we need a unique reference to the visit to check if it already exists.</td>
+</tr>
+<tr>
+<td><strong>docType</strong></td>
+<td>string</td>
+<td>no</td>
+<td>the document type associated with the visit</td>
+</tr>
+<tr>
+<td><strong>docNo</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>the document number associated with the visit</td>
+</tr>
+<tr>
+<td><strong>serviceOrder</strong></td>
+<td>number</td>
+<td>no</td>
+<td>The sequential order in which the service must be done (relative to the other visits). If you use LetsJobIt routing, routes will be sequenced and this value will be overwritten.</td>
+</tr>
+<tr>
+<td><strong>customer</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The customer name</td>
+</tr>
+<tr>
+<td><strong>siteId</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Your ERP customer address id. Useful for integrations.</td>
+</tr>
+<tr>
+<td><strong>lat</strong></td>
+<td>number</td>
+<td>no</td>
+<td>the address latitude. If absent, the address will be geocoded.</td>
+</tr>
+<tr>
+<td><strong>lng</strong></td>
+<td>number</td>
+<td>no</td>
+<td>the address longitude. If absent, the address will be geocoded.</td>
+</tr>
+<tr>
+<td><strong>site</strong></td>
+<td>string</td>
+<td>no</td>
+<td>the site (address) description. This can be an add-on to the address field.</td>
+</tr>
+<tr>
+<td><strong>address</strong></td>
+<td>string</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>postCode</strong></td>
+<td>string</td>
+<td>no</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>city</strong></td>
+<td>string</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>obs</strong></td>
+<td>string</td>
+<td>no</td>
+<td>the visit observations.</td>
+</tr>
+<tr>
+<td><strong>contactPerson</strong></td>
+<td>string</td>
+<td>no</td>
+<td>the name of the contact person at the customer</td>
+</tr>
+<tr>
+<td><strong>contactPhone</strong></td>
+<td>string</td>
+<td>no</td>
+<td>the phone number of the contact person at the customer</td>
+</tr>
+<tr>
+<td><strong>emailMandatory</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Determines if the email field in the client signature screen is mandatory. 1 for true, 0 for false.</td>
+</tr>
+<tr>
+<td><strong>priority</strong></td>
+<td>number</td>
+<td>no</td>
+<td>the service/delivery priority, from 1 to 10: 1 - highest priority, 10 - lowest priority.</td>
+</tr>
+<tr>
+<td><strong>showItemsOnOrderSection</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Determines if the items on order section in the job view is visible. 1 to show, 0 to hide.</td>
+</tr>
+<tr>
+<td><strong>hideEquipmentDetails</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Determines if the equipment details section on the job view (top) is visible. 0 to show, 1 to hide.</td>
+</tr>
+<tr>
+<td><strong>hideDeliveryItemsSection</strong></td>
+<td>number</td>
+<td>no</td>
+<td>If the delivery items sections is shown in the job view. 1 - hide, 0 - show.</td>
+</tr>
+<tr>
+<td><strong>signeeName</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The name of the customer contact that signed on visit close.</td>
+</tr>
+<tr>
+<td><strong>signeeEmail</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The email of the customer contact that signed on visit close.</td>
+</tr>
+<tr>
+<td><strong>subContractorIds</strong></td>
+<td>string array</td>
+<td>no</td>
+<td>The sub-contractor name(s) related with this visit. If more than one, they&#39;ll be supplied in a comma separated list. The leftmost name is the sub-contractor to which the visit is intended (or the one that completed the visit). If there is no sub-contractor, this field is returned as null.</td>
+</tr>
+<tr>
+<td><strong>territory</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The geographic territory associated to the visit.</td>
+</tr>
+<tr>
+<td><strong>useStartPauseStopStyleButtonsInJobs</strong></td>
+<td>number</td>
+<td>no</td>
+<td>If the job shows start/pause/stop buttons as opposed to showing only a start/finish button. This option allows you to pause one job (lunch, have to start another job and come back to this one...) and resume it afterwards.</td>
+</tr>
+<tr>
+<td><strong>inMobileApp</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Pass &quot;1&quot; if the visit is supposed to be assigned to an engineer/driver and, thus, available in her mobile app or &quot;0&quot; if it&#39;s not. Please refer to our <a href="http://support.letsjobit.routesdirect.com/support/solutions">online docs</a>.</td>
+</tr>
+<tr>
+<td><strong>NPSMandatory</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Pass &quot;1&quot; to make the NPS mandatory or &quot;0&quot; to make it optional. Please refer to our <a href="http://support.letsjobit.routesdirect.com/support/solutions">online docs</a>.</td>
+</tr>
+<tr>
+<td><strong>precedencePriorityVisit</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Pass &quot;1&quot; to make this visit a &quot;priority visit&quot; or &quot;0&quot; to make it a regular visit. Please refer to our <a href="http://support.letsjobit.routesdirect.com/support/solutions">online docs</a>.</td>
+</tr>
+<tr>
+<td><strong>closeVisitOnLastJobClose</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Pass &quot;1&quot; to close the visit when you close the last job or &quot;0&quot; to force the engineer/driver to close the visit in the usual way. Please refer to our <a href="http://support.letsjobit.routesdirect.com/support/solutions">online docs</a>.</td>
+</tr>
+<tr>
+<td><strong>country</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The 2 letters of the <a href="https://en.wikipedia.org/wiki/Country_code_top-level_domain">country code top-level domain</a>.</td>
+</tr>
+<tr>
+<td><strong>companyId</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>your company ID as recorded at LetsJobIt</td>
+</tr>
+<tr>
+<td><strong>time_windows</strong></td>
+<td>array of objects</td>
+<td>no</td>
+<td>The opening/closing times of your customer. You can have several time slots for the same customer (for instance, a customer may be opened from 8am to 1pm and from 3pm to 5pm). Please see below.</td>
+</tr>
+<tr>
+<td><strong>required_skills</strong></td>
+<td>array of strings</td>
+<td>no</td>
+<td>The skills required for this visit.</td>
+</tr>
+<tr>
+<td><strong>allowed_vehicles</strong></td>
+<td>array of strings</td>
+<td>no</td>
+<td>The vehicles allowed for this visit (you may want to restrict the visit for only a few engineers/drivers).</td>
+</tr>
+<tr>
+<td><strong>duration</strong></td>
+<td>number</td>
+<td>no</td>
+<td>The total duration in seconds of all the service jobs in the visit. This duration is only theoretical and corresponds to the durations you&#39;ve eventually sent for every service job in the visit, for routing purposes.</td>
+</tr>
+<tr>
+<td><strong>lines</strong></td>
+<td>array of objects</td>
+<td>no</td>
+<td>the line items included in the visit</td>
+</tr>
+</tbody></table>
+
+<p>The <strong>time_windows</strong> array is composed of objects with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>earliest</strong></td>
+<td>number</td>
+<td>The opening time (in seconds from midnight).</td>
+</tr>
+<tr>
+<td><strong>latest</strong></td>
+<td>number</td>
+<td>The closing time (in seconds from midnight).</td>
+</tr>
+</tbody></table>
+
+<p>The <strong>lines</strong> array is composed of objects with the following properties:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>actionItem</strong></td>
+<td>boolean</td>
+<td>yes</td>
+<td>Determines if the line item is a &quot;job type&quot; item. Please refer to our user documentation.</td>
+</tr>
+<tr>
+<td><strong>allowRebrand</strong></td>
+<td>boolean</td>
+<td>no</td>
+<td>Determines if the user is allowed to change the equipment brand in the job view. Please refer to the our user documentation.</td>
+</tr>
+<tr>
+<td><strong>brand</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The equipment brand</td>
+</tr>
+<tr>
+<td><strong>brandId</strong></td>
+<td>integer</td>
+<td>no</td>
+<td>The equipment brand id from your backend system.</td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The description of the item (what shows in the interface).</td>
+</tr>
+<tr>
+<td><strong>extraData</strong></td>
+<td>array of objects</td>
+<td>no</td>
+<td>An array of objects containing custom field definitions. These field show in the job view, after the stardard fields.</td>
+</tr>
+<tr>
+<td><strong>hasBatch</strong></td>
+<td>boolean</td>
+<td>no</td>
+<td>Determines if the line-item</td>
+</tr>
+<tr>
+<td><strong>hasReturn</strong></td>
+<td>boolean</td>
+<td>no</td>
+<td>Determines if the line item has returned items (like empty pallets or empty packages)</td>
+</tr>
+<tr>
+<td><strong>id</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Your ERP line id. Can be useful to cross check your responses and make the integration process easier.</td>
+</tr>
+<tr>
+<td><strong>itemId</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Your ERP item id.</td>
+</tr>
+<tr>
+<td><strong>jobType</strong></td>
+<td>string</td>
+<td>no</td>
+<td>Arbitrary type to classify this job. Could be &quot;delivery&quot;, &quot;installation&quot;, &quot;repair&quot;, etc</td>
+</tr>
+<tr>
+<td><strong>location</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The location of the service, within your customer premisses. &quot;bar 2nd floor&quot;, &quot;kitchen&quot;, etc.</td>
+</tr>
+<tr>
+<td><strong>model</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The model name (related with the equipment brand)</td>
+</tr>
+<tr>
+<td><strong>modelId</strong></td>
+<td>number</td>
+<td>no</td>
+<td>The model Id from your ERP</td>
+</tr>
+<tr>
+<td><strong>qty</strong></td>
+<td>number</td>
+<td>no</td>
+<td>The quantity for this item. Defaults to 1.</td>
+</tr>
+<tr>
+<td><strong>serialNr</strong></td>
+<td>string</td>
+<td>no</td>
+<td>The equipment serial number for this job.</td>
+</tr>
+<tr>
+<td><strong>serialNrId</strong></td>
+<td>number</td>
+<td>no</td>
+<td>Your ERP serialNr Id. Useful for integration purposes.</td>
+</tr>
+</tbody></table>
+
+<p>The <strong>extraData</strong> array is composed of objects with the following below. Custome fields defined here will show in the service line items. </p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>type</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The field html5 type. One of <code>text</code>,<code>date</code>,<code>number</code>,<code>email</code>,<code>color</code>,<code>range</code> or <code>select</code>. See <a href="http://www.w3schools.com/html/html_form_input_types.asp">here</a>.</td>
+</tr>
+<tr>
+<td><strong>caption</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The field name to show to the user.</td>
+</tr>
+<tr>
+<td><strong>description</strong></td>
+<td>string</td>
+<td>no</td>
+<td>An optional description to show above the caption, intructing the user on how to fill in that field.</td>
+</tr>
+<tr>
+<td><strong>value</strong></td>
+<td>string or number</td>
+<td>no</td>
+<td>The default value you want this field to have.</td>
+</tr>
+<tr>
+<td><strong>required</strong></td>
+<td>string</td>
+<td>no</td>
+<td>Pass &quot;required&quot; if you want this field to be required in the app.</td>
+</tr>
+<tr>
+<td><strong>readonly</strong></td>
+<td>string</td>
+<td>no</td>
+<td>Pass &quot;readonly&quot; if you want this field to be readonly in the app.</td>
+</tr>
+<tr>
+<td><strong>options_values</strong></td>
+<td>string</td>
+<td>no</td>
+<td>Only used if the <strong>type</strong> is <code>select</code>. The option values for the field, separated by pipes. Example: <code>&quot;option1 &#124; option2&quot;</code>.</td>
+</tr>
+<tr>
+<td><strong>options_default</strong></td>
+<td>string</td>
+<td>no</td>
+<td>Only used if the <strong>type</strong> is <code>select</code>. The default value for the select options.</td>
+</tr>
+<tr>
+<td><strong>max</strong></td>
+<td>integer</td>
+<td>no</td>
+<td>The max value for the field (only applies to numeric fields)</td>
+</tr>
+<tr>
+<td><strong>min</strong></td>
+<td>integer</td>
+<td>no</td>
+<td>The min value for the field (only applies to numeric fields)</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>string</td>
+<td>yes</td>
+<td>The field name as saved to the database.</td>
+</tr>
+<tr>
+<td><strong>pattern</strong></td>
+<td>string</td>
+<td>no</td>
+<td>A regexp expression to validate the field against. Example: <code>[0-9]+([\.,][0-9]+)?</code></td>
+</tr>
+<tr>
+<td><strong>step</strong></td>
+<td>number</td>
+<td>no</td>
+<td>The html5 step value for the field (only applies to numeric fields)</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-specific-visit'>Update a specific visit</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.letsjobit.com/api/v2/visits/1"</span>
+  -X PUT
+  -H <span class="s2">"Authorization: Bearer MY_API_KEY"</span>
+  -H <span class="s1">'Content-Type: application/json'</span>
+  --data <span class="s1">$'{"date": "2018-12-20",
+                "driverId": "12345",
+                "obs": "No parking available"}'</span>
+</code></pre>
+<blockquote>
+<p>Make sure to replace MY_API_KEY by your API_KEY</p>
+
+<p>The above command updates the date, driverId and obs fields in the 
+visit with ID = 1. The returns JSON will be similar to the below:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"updatedRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint updates a specific visit.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://app.letsjobit.com/api/v2/visits/{ID}</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Format</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>string</td>
+<td>The ID of the visit to delete</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-specific-visit'>Delete a specific visit</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://app.letsjobit.com/api/v2/visits/1"</span>
+  -X DELETE
+  -H <span class="s2">"Authorization: Bearer MY_API_KEY"</span>
+</code></pre>
+<blockquote>
+<p>Make sure to replace MY_API_KEY by your API_KEY</p>
+
+<p>The above command deletes the visit with ID = 1 and returns JSON similar to the below:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"deletedRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes a specific visit.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE https://app.letsjobit.com/api/v2/visits/{ID}</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>string</td>
+<td>The ID of the visit to delete</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
@@ -493,12 +1610,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>
